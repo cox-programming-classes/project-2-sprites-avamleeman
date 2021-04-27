@@ -1,6 +1,7 @@
-class Enemy extends Sprite
+class Enemy extends Sprite implementd ICollisionBox
 {
   protected color col;
+  protected float r;
 
   public Enemy(float x, float y, color c)
   {
@@ -16,6 +17,17 @@ class Enemy extends Sprite
   public void drawSprite()
   {
     fill(col);
+  }
+  
+   float getRadius()
+  {
+    return r;
+  }
+  
+  boolean colldiesWith(ICollisionBox other)
+  {
+    float distance = this.pos.subtract(other.getPosition()).mag();
+    return distance < this.r + other.getRadius();
   }
   
    public void keyboardControl()

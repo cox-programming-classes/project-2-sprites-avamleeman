@@ -1,5 +1,9 @@
 public class Player extends Sprite implements ICollisionBox
 {
+  protected Vector2 pos;
+  protected Vector2 vel;
+  protected float r;
+  
   public Player(float x, float y)
   {
     super(x, y); 
@@ -10,10 +14,21 @@ public class Player extends Sprite implements ICollisionBox
     super(s); 
   }
   
+  boolean colldiesWith(ICollisionBox other)
+  {
+    float distance = this.pos.subtract(other.getPosition()).mag();
+    return distance < this.r + other.getRadius();
+  }
+  
+  float getRadius()
+  {
+    return r;
+  }
+  
   public void drawSprite()
   {
     fill(#2b6389);
-  Vector2 v = new Vector2(0, -50);
+  Vector2 v = new Vector2(0, -r);
   Vector2 v2 = v.rotate(PI/5).scale(0.5);
   Vector2 v3 = v.rotate(2*PI/5);
   Vector2 v4 = v2.rotate(2*PI/5);

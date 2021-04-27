@@ -29,9 +29,16 @@ public abstract class Sprite
   
   public abstract void drawSprite(); //void drawSprite must be in class that extends Sprite (ex. Blob)
   
-  public void move()
+ public void move()
   {
+    //step the position "one frame" by the velocity vector
     pos = pos.add(vel);
+    
+    if(pos.x > width) pos.x -= width;
+    else if(pos.x < 0) pos.x += width; //else if cannot be true if if is true
+    
+    if(pos.y > height) pos.y -= height;
+    else if(pos.y < 0) pos.y += height;
   }
   
   public void moveTo(Vector2 newPosition)
